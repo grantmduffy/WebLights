@@ -7,7 +7,6 @@ import machine
 led1 = machine.Pin(2, machine.Pin.OUT)
 led2 = machine.Pin(16, machine.Pin.OUT)
 
-# Connect to network
 def connect():
     import network
     with open('network.txt', 'r') as f:
