@@ -2,16 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <style>
+    .slider_r {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 25px;
+      background: #FF8080;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider_r:hover {
+      opacity: 1;
+    }
+
+    .slider_r::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #FF0000;
+      cursor: pointer;
+    }
+
+    .slider_g {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 25px;
+      background: #80FF80;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider_g:hover {
+      opacity: 1;
+    }
+
+    .slider_g::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #00FF00;
+      cursor: pointer;
+    }
+
+    .slider_b {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 25px;
+      background: #8080FF;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider_b:hover {
+      opacity: 1;
+    }
+
+    .slider_b::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #0000FF;
+      cursor: pointer;
+    }
+    </style>
     <title>Hello World</title>
 </head>
-<body>
-Hello World
-<br>
-<button type="button" onclick="on1()">Led 1 On</button>
-<button type="button" onclick="on2()">Led 2 On</button><br>
-<button type="button" onclick="off1()">Led 1 Off</button>
-<button type="button" onclick="off2()">Led 2 Off</button>
 
+<body>
+<div id="color">
+    <h1>Color Picker</h1><br>
+</div>
+<input id="red" type="range" min="0" max="255" value="0" step="1" class="slider_r" onchange="onRed()">
+<input id="green" type="range" min="0" max="255" value="0" step="1" class="slider_g" onchange="onGreen()">
+<input id="blue" type="range" min="0" max="255" value="0" step="1" class="slider_b" onchange="onBlue()">
 <div id="response"></div>
 </body>
 <script src="scripts.js"></script>

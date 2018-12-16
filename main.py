@@ -6,9 +6,15 @@ import machine
 import uio
 import ure
 import json
+import neopixel
+
+PIXEL_COUNT = 50
 
 led1 = machine.Pin(2, machine.Pin.OUT)
 led2 = machine.Pin(16, machine.Pin.OUT)
+color = [0, 0, 0]
+brightness = 0.1
+px = neopixel.NeoPixel(machine.Pin(15), PIXEL_COUNT)
 
 
 def send_response(status, body=''):
@@ -16,6 +22,7 @@ def send_response(status, body=''):
 
 
 def parse_request(request):
+    print("GOT REQUEST:\n{}".format(request))
     output = {}
     with uio.BytesIO(request) as f:
         output['Type'], output['Path'], output['Version'] = [x.decode('utf-8').strip() for x in f.readline().split()]
@@ -58,6 +65,7 @@ def connect():
         led2.off()
         time.sleep(0.1)
     print('Connected')
+    print(sta_if.ifconfig()[0])
     led1.off()
     led2.off()
     time.sleep(0.5)
@@ -65,8 +73,12 @@ def connect():
     led2.on()
 
 
+def update_color():
+    print('R: {}, G: {}, B: {}'.format(*color))
+
+
 def start_server():
-    global cl
+    global cl, brightness, color, px
     run = True
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(('', 80))
@@ -88,6 +100,21 @@ def start_server():
                     led1.off() if command['led1'] == 1 else led1.on()
                 if 'led2' in command:
                     led2.off() if command['led2'] == 1 else led2.on()
+                if 'r' in command:
+                    color[0] = command['r']
+                    update_color()
+                if 'g' in command:
+                    color[1] = command['g']
+                    update_color()
+                if 'b' in command:
+                    color[2] = command['b']
+                    update_color()
+                if 'brightness' in command:
+                    brightness = command['brightness']
+                if 'r' in command or 'g' in command or 'b' in command:
+                    for i, p in enumerate(px):
+                        px[i] = color
+                    px.write()
                 send_response('HTTP/1.1 200 OK', 'Updated Leds')
         cl.close()
 
