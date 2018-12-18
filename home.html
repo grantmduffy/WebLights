@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <title>Web LEDs</title>
     <style>
     .slider_r {
       -webkit-appearance: none;
@@ -75,16 +75,13 @@
       cursor: pointer;
     }
     </style>
-    <title>Hello World</title>
 </head>
 
 <body>
-<div id="color">
-    <h1>Color Picker</h1><br>
-</div>
-<input id="red" type="range" min="0" max="255" value="0" step="1" class="slider_r" onchange="onRed()">
-<input id="green" type="range" min="0" max="255" value="0" step="1" class="slider_g" onchange="onGreen()">
-<input id="blue" type="range" min="0" max="255" value="0" step="1" class="slider_b" onchange="onBlue()">
+<h1>Color Picker</h1><br>
+<input class="slider_r" id="red" type="range" min="0" max="255" value="0" step="1" oninput="onRed()"><br>
+<input class="slider_g" id="green" type="range" min="0" max="255" value="0" step="1" oninput="onGreen()"><br>
+<input class="slider_b" id="blue" type="range" min="0" max="255" value="0" step="1" oninput="onBlue()"><br>
 <div id="response"></div>
 </body>
 <script src="scripts.js"></script>
